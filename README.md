@@ -4,8 +4,6 @@ A lightweight, strongly-typed .NET client for working with User Defined Tables (
 
 This library removes the need to manually construct JSON payloads by allowing you to use simple C# DTOs with attributes.
 
----
-
 ## Why this exists
 
 Working with UDT APIs typically requires building JSON payloads manually. This is:
@@ -15,8 +13,6 @@ Working with UDT APIs typically requires building JSON payloads manually. This i
 - hard to maintain  
 
 **UdtClient replaces that with strongly-typed C# DTOs**, making your code cleaner and safer.
-
----
 
 ## Quick Start
 
@@ -48,8 +44,6 @@ public sealed class CustomerInventoryReservationDto
 }
 ```
 
----
-
 ## Design Principles
 
 - Explicit DTO registration (no automatic scanning)
@@ -57,8 +51,6 @@ public sealed class CustomerInventoryReservationDto
 - Exactly one UID per DTO
 - No dynamic or string-based mapping
 - Focused on UDT operations only (not an ORM)
-
----
 
 ## Disclaimer
 
