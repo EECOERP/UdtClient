@@ -16,7 +16,7 @@ Working with UDT APIs typically requires building JSON payloads manually. This i
 
 ## Quick Start
 
-### 1. Register your DTOs
+### 1. Register your POCO in Program.cs:
 
 ```csharp
 builder.Services.AddUdtClient(
@@ -28,8 +28,10 @@ builder.Services.AddUdtClient(
     {
         udt.AddDto<CustomerInventoryReservationDto>();
     });
+```
 
-
+### 2. Decorate any POCO with attributes to map your class and properties to your UDT table and columns: 
+```csharp
 [UdtTable("udt_customer_inventory_reservation")]
 public sealed class CustomerInventoryReservationDto
 {
@@ -41,8 +43,25 @@ public sealed class CustomerInventoryReservationDto
 
     [UdtColumn("item_id")]
     public string ItemId { get; init; } = "";
+
+    [UdtColumn("reserved_qty")]
+    public int ReservedQuantity { get; init; } 
 }
 ```
+
+### 3. Insert single instance or lists of your registered and mapped POCO:
+
+```csharp
+var reservation = new CustomerInventoryReservation
+{
+    CustomerId = formModel.CustomerId,
+    ItemId = formModel.ItemId,
+    ReservedQuantity = formModel.ReservedQuantity
+};
+
+await UdtRepository.InsertAsync<CustomerInventoryReservation>(reservation);
+```
+
 
 ## Design Principles
 
