@@ -28,22 +28,52 @@ public sealed class UdtClient : IUdtClient
             throw new ArgumentException("BaseUrl is required.", nameof(options));
     }
 
+    Task IUdtClient.InsertAsync<T>(T dto, CancellationToken cancellationToken)
+        where T : class
+        => InsertAsync(_mapper.MapInsert(dto), cancellationToken);
+
+    Task IUdtClient.InsertAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken)
+        where T : class
+        => InsertAsync(_mapper.MapInsert(dtos), cancellationToken);
+
+    Task IUdtClient.UpdateAsync<T>(T dto, CancellationToken cancellationToken)
+        where T : class
+        => UpdateAsync(_mapper.MapUpdate(dto), cancellationToken);
+
+    Task IUdtClient.UpdateAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken)
+        where T : class
+        => UpdateAsync(_mapper.MapUpdate(dtos), cancellationToken);
+
+    Task IUdtClient.DeleteAsync<T>(T dto, CancellationToken cancellationToken)
+        where T : class
+        => DeleteAsync(_mapper.MapDelete(dto), cancellationToken);
+
+    Task IUdtClient.DeleteAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken)
+        where T : class
+        => DeleteAsync(_mapper.MapDelete(dtos), cancellationToken);
+
     public Task InsertAsync<T>(T dto, CancellationToken cancellationToken = default)
+        where T : class
         => InsertAsync(_mapper.MapInsert(dto), cancellationToken);
 
     public Task InsertAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken = default)
+        where T : class
         => InsertAsync(_mapper.MapInsert(dtos), cancellationToken);
 
     public Task UpdateAsync<T>(T dto, CancellationToken cancellationToken = default)
+        where T : class
         => UpdateAsync(_mapper.MapUpdate(dto), cancellationToken);
 
     public Task UpdateAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken = default)
+        where T : class
         => UpdateAsync(_mapper.MapUpdate(dtos), cancellationToken);
 
     public Task DeleteAsync<T>(T dto, CancellationToken cancellationToken = default)
+        where T : class
         => DeleteAsync(_mapper.MapDelete(dto), cancellationToken);
 
     public Task DeleteAsync<T>(IEnumerable<T> dtos, CancellationToken cancellationToken = default)
+        where T : class
         => DeleteAsync(_mapper.MapDelete(dtos), cancellationToken);
 
     private async Task InsertAsync(UdtInsertRequest request, CancellationToken cancellationToken)

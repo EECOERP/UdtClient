@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Prophet21.Udt.SampleWeb": {
+    "UdtClient.SampleWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

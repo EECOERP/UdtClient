@@ -30,7 +30,7 @@ public sealed class UdtTypeMapRegistry : IUdtTypeMapRegistry
         }
     }
 
-    public void Register<T>() => Register(typeof(T));
+    public void Register<T>() where T : class => Register(typeof(T));
 
     public UdtTypeMap Get(Type dtoType)
     {
@@ -45,5 +45,5 @@ public sealed class UdtTypeMapRegistry : IUdtTypeMapRegistry
             $"DTO type '{dtoType.FullName}' has not been registered. Register it in Program.cs with AddDto<{dtoType.Name}>().");
     }
 
-    public UdtTypeMap Get<T>() => Get(typeof(T));
+    public UdtTypeMap Get<T>() where T : class => Get(typeof(T));
 }

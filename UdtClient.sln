@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37111.16 d17.14
+VisualStudioVersion = 17.14.37111.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdtClient", "src\Udt\UdtClient.csproj", "{B0378437-EC05-0C1D-493F-0C4E89EC0CA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdtClient.Tests", "tests\Udt.Tests\UdtClient.Tests.csproj", "{318B7D9B-4BA5-BD0A-D456-3516FA40F4FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdtClient.SampleWeb", "samples\Udt.SampleWeb\UdtClient.SampleWeb.csproj", "{F88F64E5-144C-E7B2-1B00-A1BD52A07BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udt.Analyzer", "src\Udt.Analyzer\Udt.Analyzer.csproj", "{F7B49EF7-DBC4-9538-88D4-AACCC8B47D4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F88F64E5-144C-E7B2-1B00-A1BD52A07BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F88F64E5-144C-E7B2-1B00-A1BD52A07BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F88F64E5-144C-E7B2-1B00-A1BD52A07BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B49EF7-DBC4-9538-88D4-AACCC8B47D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B49EF7-DBC4-9538-88D4-AACCC8B47D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B49EF7-DBC4-9538-88D4-AACCC8B47D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B49EF7-DBC4-9538-88D4-AACCC8B47D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

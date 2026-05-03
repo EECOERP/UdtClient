@@ -11,13 +11,13 @@ public sealed class ReflectionUdtMetadataMapper : IUdtMetadataMapper
         _registry = registry;
     }
 
-    public UdtInsertRequest MapInsert<T>(T dto)
+    public UdtInsertRequest MapInsert<T>(T dto) where T : class
     {
         ArgumentNullException.ThrowIfNull(dto);
-        return MapInsert(new[] { dto });
+        return MapInsert((IEnumerable<T>)[dto]);
     }
 
-    public UdtInsertRequest MapInsert<T>(IEnumerable<T> dtos)
+    public UdtInsertRequest MapInsert<T>(IEnumerable<T> dtos) where T : class
     {
         ArgumentNullException.ThrowIfNull(dtos);
         var items = dtos.ToList();
@@ -37,13 +37,13 @@ public sealed class ReflectionUdtMetadataMapper : IUdtMetadataMapper
         };
     }
 
-    public UdtUpdateRequest MapUpdate<T>(T dto)
+    public UdtUpdateRequest MapUpdate<T>(T dto) where T : class
     {
         ArgumentNullException.ThrowIfNull(dto);
-        return MapUpdate(new[] { dto });
+        return MapUpdate((IEnumerable<T>)[dto]);
     }
 
-    public UdtUpdateRequest MapUpdate<T>(IEnumerable<T> dtos)
+    public UdtUpdateRequest MapUpdate<T>(IEnumerable<T> dtos) where T : class
     {
         ArgumentNullException.ThrowIfNull(dtos);
         var items = dtos.ToList();
@@ -66,13 +66,13 @@ public sealed class ReflectionUdtMetadataMapper : IUdtMetadataMapper
         };
     }
 
-    public UdtDeleteRequest MapDelete<T>(T dto)
+    public UdtDeleteRequest MapDelete<T>(T dto) where T : class
     {
         ArgumentNullException.ThrowIfNull(dto);
-        return MapDelete(new[] { dto });
+        return MapDelete((IEnumerable<T>)[dto]);
     }
 
-    public UdtDeleteRequest MapDelete<T>(IEnumerable<T> dtos)
+    public UdtDeleteRequest MapDelete<T>(IEnumerable<T> dtos) where T : class
     {
         ArgumentNullException.ThrowIfNull(dtos);
         var items = dtos.ToList();

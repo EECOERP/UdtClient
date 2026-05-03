@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	<TargetFramework>net8.0</TargetFramework>
     <AssemblyName>UdtClient</AssemblyName>
     <RootNamespace>UdtClient</RootNamespace>
 	
 	<PackageId>UdtClient</PackageId>
-	<Version>0.1.2</Version>
+	<Version>0.1.5</Version>
 	<Authors>Neil Timmerman</Authors>
 	<Company>Electrical Equipment Company</Company>
 
@@ -27,5 +27,10 @@
   </ItemGroup>
   <ItemGroup>
 	<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Udt.Analyzer\Udt.Analyzer.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

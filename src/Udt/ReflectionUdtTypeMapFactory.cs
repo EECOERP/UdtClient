@@ -8,62 +8,38 @@ public sealed class ReflectionUdtTypeMapFactory : IUdtTypeMapFactory
     {
         ArgumentNullException.ThrowIfNull(dtoType);
 
-        var tableAttribute = dtoType.GetCustomAttribute<UdtTableAttribute>();
-        if (tableAttribute is null)
+        var tableAttr = dtoType.GetCustomAttribute<UdtTableAttribute>()
+            ?? throw new InvalidOperationException(
+                $"'{dtoType.Name}' is missing [UdtTable]. All IUdtDto types must declare a table name.");
+
+        var properties = dtoType.GetProperties();
+
+        PropertyInfo? uidProp = null;
+        UdtUidAttribute? uidAttr = null;
+        var columns = new List<UdtMappedColumn>();
+
+        foreach (var prop in properties)
         {
-            throw new InvalidOperationException(
-                $"Type '{dtoType.FullName}' must be decorated with [{nameof(UdtTableAttribute)}].");
-        }
-
-        var properties = dtoType
-            .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-            .Where(p => p.CanRead)
-            .ToList();
-
-        var uidProperties = properties
-            .Where(p => p.GetCustomAttribute<UdtUidAttribute>() is not null)
-            .ToList();
-
-        if (uidProperties.Count != 1)
-        {
-            throw new InvalidOperationException(
-                $"Type '{dtoType.FullName}' must define exactly one property with [{nameof(UdtUidAttribute)}].");
-        }
-
-        var uidProperty = uidProperties[0];
-        var uidAttribute = uidProperty.GetCustomAttribute<UdtUidAttribute>()!;
-
-        if (!IsSupportedUidType(uidProperty.PropertyType))
-        {
-            throw new InvalidOperationException(
-                $"Property '{dtoType.FullName}.{uidProperty.Name}' marked with [{nameof(UdtUidAttribute)}] must be an integer type.");
-        }
-
-        var mappedColumns = properties
-            .Select(p => new
+            var uid = prop.GetCustomAttribute<UdtUidAttribute>();
+            if (uid is not null)
             {
-                Property = p,
-                ColumnAttribute = p.GetCustomAttribute<UdtColumnAttribute>()
-            })
-            .Where(x => x.ColumnAttribute is not null)
-            .Select(x => new UdtMappedColumn(x.Property, x.ColumnAttribute!))
-            .ToList();
+                if (uidProp is not null)
+                    throw new InvalidOperationException(
+                        $"'{dtoType.Name}' has more than one [UdtUid] property.");
 
-        return new UdtTypeMap(
-            dtoType,
-            tableAttribute.TableName,
-            uidProperty,
-            uidAttribute,
-            mappedColumns);
-    }
+                uidProp = prop;
+                uidAttr = uid;
+            }
+            else if (prop.GetCustomAttribute<UdtColumnAttribute>() is { } colAttr)
+            {
+                columns.Add(new UdtMappedColumn(prop, colAttr));
+            }
+        }
 
-    private static bool IsSupportedUidType(Type type)
-    {
-        var actualType = Nullable.GetUnderlyingType(type) ?? type;
+        if (uidProp is null || uidAttr is null)
+            throw new InvalidOperationException(
+                $"'{dtoType.Name}' has no [UdtUid] property. Exactly one property must carry [UdtUid].");
 
-        return actualType == typeof(byte)
-            || actualType == typeof(short)
-            || actualType == typeof(int)
-            || actualType == typeof(long);
+        return new UdtTypeMap(dtoType, tableAttr.TableName, uidProp, uidAttr, columns);
     }
 }

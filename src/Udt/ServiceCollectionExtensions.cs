@@ -14,6 +14,15 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(configureOptions);
         ArgumentNullException.ThrowIfNull(configureDtos);
 
+        var options = new UdtOptions();
+        configureOptions(options);
+
+        if (string.IsNullOrWhiteSpace(options.BaseUrl))
+            throw new ArgumentException("UdtOptions.BaseUrl is required.", nameof(configureOptions));
+
+        if (string.IsNullOrWhiteSpace(options.BearerToken))
+            throw new ArgumentException("UdtOptions.BearerToken is required.", nameof(configureOptions));
+
         services.Configure(configureOptions);
         services.AddSingleton<IUdtTypeMapFactory, ReflectionUdtTypeMapFactory>();
         services.AddSingleton<IUdtTypeMapRegistry, UdtTypeMapRegistry>();
@@ -26,11 +35,8 @@ public static class ServiceCollectionExtensions
 
         services.AddHttpClient<IUdtClient, UdtClient>((sp, client) =>
         {
-            var options = sp.GetRequiredService<IOptions<UdtOptions>>().Value;
-            if (!string.IsNullOrWhiteSpace(options.BaseUrl))
-            {
-                client.BaseAddress = new Uri(options.BaseUrl);
-            }
+            var opts = sp.GetRequiredService<IOptions<UdtOptions>>().Value;
+            client.BaseAddress = new Uri(opts.BaseUrl);
         });
 
         return services;

@@ -2,18 +2,15 @@ using UdtClient;
 
 namespace UdtClient.SampleWeb;
 
-[UdtTable("udt_band_api_sync_vendors")]
-public sealed class VendorSyncDto
+[UdtTable("udt_customer_inventory_reservation")]
+public sealed class CustomerInventoryReservation
 {
     [UdtUid]
     public int RowUid { get; init; }
 
-    [UdtColumn("vendor_id")]
-    public string VendorId { get; init; } = string.Empty;
+    [UdtColumn("customer_id")]
+    public string CustomerId { get; init; } = string.Empty;
 
-    [UdtColumn("band_vendor_id")]
-    public string BandVendorId { get; init; } = string.Empty;
-
-    [UdtColumn("date_last_synchronized")]
-    public DateOnly LastSynchronizedDate { get; init; }
+    [UdtColumn("reserved_quantity")]
+    public int ReservedQuantity { get; init; }
 }
