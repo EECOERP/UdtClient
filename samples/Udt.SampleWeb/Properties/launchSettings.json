@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Prophet21.Udt.SampleWeb": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:52704;http://localhost:52705"
+    }
+  }
+}

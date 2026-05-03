@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>UdtClient</AssemblyName>
+    <RootNamespace>UdtClient</RootNamespace>
+	
+	<PackageId>UdtClient</PackageId>
+	<Version>0.1.1</Version>
+	<Authors>Neil Timmerman</Authors>
+	<Company>Electrical Equipment Company</Company>
+
+	<Description>A lightweight, strongly-typed .NET client for working with UDT-style HTTP APIs.</Description>
+	<PackageTags>UDT;ERP;HTTP;Client;DotNet</PackageTags>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+
+	<RepositoryUrl>https://github.com/EECOERP/UdtClient</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageProjectUrl>https://github.com/EECOERP/UdtClient</PackageProjectUrl>
+
+	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

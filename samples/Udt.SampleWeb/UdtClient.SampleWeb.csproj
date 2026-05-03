@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>UdtClient.SampleWeb</AssemblyName>
+    <RootNamespace>UdtClient.SampleWeb</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Udt\UdtClient.csproj" />
+  </ItemGroup>
+</Project>
