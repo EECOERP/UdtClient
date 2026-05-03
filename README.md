@@ -26,7 +26,7 @@ builder.Services.AddUdtClient(
     },
     udt =>
     {
-        udt.AddDto<VendorSyncDto>();
+        udt.AddDto<CustomerInventoryReservationDto>();
     });
 
 
