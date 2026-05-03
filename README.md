@@ -49,7 +49,7 @@ public sealed class CustomerInventoryReservationDto
 }
 ```
 
-### 3. Insert single instance or lists of your registered and mapped POCO:
+### 3. Insert, Update, or Delete single instance or lists of your registered and mapped POCO:
 
 ```csharp
 var reservation = new CustomerInventoryReservation
